@@ -1,17 +1,19 @@
-let lista = document.getElementById("lista")
+let container = document.getElementById("container")
 
-const fetchProducts =async () =>{
-
-
-
+async function fetchProducts(){
 try{
     const response = await fetch("https://dummyjson.com/products")
     const data = await response.json()
+    console.log(data.products)
 
     data.products.forEach(product =>{
-      let item  = document.createElement("li")
-      item.innerText = product.title 
-      ByteLengthQueuingStrategy.appendChild(item)
+      container.innerHTML += `<div class="card">
+      <img src="${product.images[0]}" alt="Avatar" style="width:100px; height:100px">
+      <div class="container">
+        <h4><b>${product.title}</b></h4>
+        <p>${product.description}</p>
+      </div>
+    </div>`
 
 
     });
@@ -25,5 +27,5 @@ try{
 
 
 }
-}
+
 fetchProducts()
